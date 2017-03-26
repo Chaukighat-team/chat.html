@@ -6,8 +6,7 @@
   </head>
   
   <body>
-    <video id="localVideo" autoplay/>
-    <script>
+  <  center><video id="localVideo" autoplay/></center><script>
       window.addEventListener("load", function (evt) {
         navigator.getUserMedia({ audio: true, video: true},
           function(stream) {
