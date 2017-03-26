@@ -25,6 +25,17 @@ peerConn.onaddstream = function (evt) {
   var videoElem = document.createElement("video");
   document.appendChild(videoElem);
   videoElem.src = URL.createObjectURL(evt.stream);
-};    </script>
+};   navigator.getUserMedia({video: true}, function(stream) {
+  videoElem.src = URL.createObjectURL(stream);
+  peerConn.addStream(stream);
+
+  peerConn.setRemoteDescription(new RTCSessionDescription(offer), function() {
+    peerConn.createAnswer(function(answer) {
+      peerConn.setLocalDescription(new RTCSessionDescription(answer), function() {
+        // send the answer to a server to be forwarded back to the caller
+      }, error);
+    }, error);
+  }, error);
+});</script>
   </body>
 </html>
