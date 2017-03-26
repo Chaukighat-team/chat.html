@@ -1,13 +1,13 @@
-&lt;!DOCTYPE html>
-&lt;html>
-  &lt;head>
-    &lt;script src="webrtc.js">&lt;/script>
-    &lt;title>WebRTC Test&lt;/title>
-  &lt;/head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="webrtc.js"></script>
+    <title>WebRTC Test</title>
+  </head>
   
-  &lt;body>
-    &lt;video id="localVideo" autoplay/>
-    &lt;script>
+  <body>
+    <video id="localVideo" autoplay/>
+    <script>
       window.addEventListener("load", function (evt) {
         navigator.getUserMedia({ audio: true, video: true},
           function(stream) {
@@ -19,6 +19,12 @@
           }
         );
       });
-    &lt;/script>
-  &lt;/body>
-&lt;/html>
+      
+      var peerConn= new RTCPeerConnection();
+peerConn.onaddstream = function (evt) {
+  var videoElem = document.createElement("video");
+  document.appendChild(videoElem);
+  videoElem.src = URL.createObjectURL(evt.stream);
+};    </script>
+  </body>
+</html>
